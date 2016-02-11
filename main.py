@@ -1,6 +1,8 @@
 # This is the main file
 # for the challenge. Please
 # post all your code here.
+import objects
+
 
 def get_data(file_name):
 	f = open(file_name, "r")
@@ -32,9 +34,24 @@ def get_data(file_name):
 
 	return (ROWS, COLS, DRONES, TURNS, W_LIMIT, LIST_WAREHOUSES, LIST_ORDER)
 
+def send_drones(drones, warehouses):
+	for drone in drones: drone.location = warehouses[0].location
+	for warehouse in warehouses:
+		for i in range(0, int(math.floor(len(drones)/len(warehouses)))):
+			drones.pop().fly(warehouse.location)
 
+	for drone in drones: drone.fly(warehouses[-1].location)
 
+def calc_orders(warehouse, orders):
+	lis = []
 
+	for order in orders:
+		lis.append(order)
+		for o_type in order[2]: 
+			if !warehouse.is_in_stock(o_type):
+				del lis[-1]
+				break
+	return lis
 
 
 if __name__ == "__main__":
@@ -44,4 +61,4 @@ if __name__ == "__main__":
 	print("Drones: " + str(DRONES))
 	print("Weight limit: " + str(W_LIMIT))
 	print("N of warehouses: " + str(len(LIST_WAREHOUSES)))
-	print("N of orders: " + str(len(LIST_ORDER)))
+	print("N of orders: " + str((LIST_ORDER[0])))
