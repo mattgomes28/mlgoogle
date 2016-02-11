@@ -2,22 +2,15 @@
 # for the challenge. Please
 # post all your code here.
 import numpy as np
+from objects import Warehouse
 
 def initMap(row, col):
     sim_area = np.zeros((row,col))
     sim_area = sim_area.astype('O')
     return sim_area
 
-def populateMap(area, pos, obj):
-    """w for warehouse, d for drone, c for customer
-    w -> 1, d -> 2, c -> 3"""
-    row, col = pos
-    if obj == "w":
-        area[row,col] = 1
-    elif obj == "d":
-        area[row,col] = 2
-    else:
-        area[row,col] = 3
+def populateMap():
+    pass
 
 def get_data(file_name):
 	f = open(file_name, "r")
@@ -56,11 +49,12 @@ def get_data(file_name):
 
 if __name__ == "__main__":
 	(ROWS, COLS, DRONES, TURNS, W_LIMIT, LIST_WAREHOUSES, LIST_ORDER) = get_data("mother_of_all_warehouses.in")
-	sim_area = initMap(ROWS, COLS)
-	
+	# sim_area = initMap(ROWS, COLS)
 	print("Rows: " + str(ROWS))
 	print("Cols: " + str(COLS))
 	print("Drones: " + str(DRONES))
 	print("Weight limit: " + str(W_LIMIT))
 	print("N of warehouses: " + str(len(LIST_WAREHOUSES)))
 	print("N of orders: " + str(len(LIST_ORDER)))
+	warehouses = [Warehouse(location, items) for location, items in LIST_WAREHOUSES]
+	print(warehouses[0].get_stock(1))
