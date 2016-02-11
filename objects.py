@@ -33,7 +33,8 @@ class Drone(object):
 	def update(self):
 		if self.units > 0 : self.units -= self.units
 		else: 
-			if self.tasks[0][0] == "l": self.tasks[0][1].load(self.tasks[0][2])
+			if self.tasks[0][0] == "l": 
+				self.tasks[0][1].load(self.tasks[0][2])
 			self.location = self.dest
 			if self.tasks != []: 
 				del(self.tasks[0])
@@ -43,7 +44,6 @@ class Drone(object):
 				elif self.tasks != [] and self.tasks[0][0] == "l":
 					self.dest = self.tasks[0][0].location
 					self.fly(self.dest)
-		self.fly(warehouse)
 
 class Warehouse(object):
 
